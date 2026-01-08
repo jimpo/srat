@@ -117,7 +117,7 @@ p6Help(d, b).
 p7(L) :- nth1(7, L, A7), nth1(8, L, A8), charDist(A7, A8, N), p7Help(A7, N).
 p7Help(a, 4).
 p7Help(b, 3).
-p7Help(c, 3).
+p7Help(c, 2).
 p7Help(d, 1).
 p7Help(e, 0).
 
