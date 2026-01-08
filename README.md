@@ -8,13 +8,24 @@ Currently, the program runs far too inefficiently to actually generate the solut
 
 ## Running
 
-First install [SWI-Prolog](http://www.swi-prolog.org/). Open the REPL by running `$ swipl`.
-
+Verify a solution:
+```bash
+docker run --rm -v "$(pwd):/app" -w /app swipl swipl -g "consult('srat.pl'), (solve([d,a,d,b,e,d,d,e,d,a,b,a,d,b,a,d,b,a,b,e]) -> write('Valid') ; write('Invalid')), nl, halt."
 ```
+
+Interactive REPL:
+```bash
+docker run --rm -it -v "$(pwd):/app" -w /app swipl swipl
+```
+
+```prolog
 ?- [srat].  % Load the program
 
-?- solve([a, a, a, a, a, a]).  % Prove a given solution
+?- solve([d,a,d,b,e,d,d,e,d,a,b,a,d,b,a,d,b,a,b,e]).  % Verify a solution
+true.
+
+?- solve([a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a]).  % Test invalid solution
 false.
 
-?- solve([ANS]).  % Generate the solution.
+?- solve(ANS).  % Generate the solution (too slow - see Status)
 ```
