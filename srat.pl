@@ -17,7 +17,7 @@ allAnswers([H | T]) :- answer(H), allAnswers(T).
 % Count the number of occurances an element has in a list.
 count([], _, 0).
 count([X | T], X, N) :- count(T, X, M), N is M + 1.
-count([H | T], X, N) :- count(T, X, N), H \= X.
+count([H | T], X, N) :- dif(H, X), count(T, X, N).
 
 countVowels([], 0).
 countVowels([H | T], N) :-
@@ -33,7 +33,7 @@ countConsonants([H | T], N) :-
 countIdenticalConsecutive([], 0).
 countIdenticalConsecutive([_], 0).
 countIdenticalConsecutive([X, X | T], N) :- countIdenticalConsecutive([X | T], M), N is M + 1.
-countIdenticalConsecutive([X, Y | T], N) :- countIdenticalConsecutive([Y | T], N), X \= Y.
+countIdenticalConsecutive([X, Y | T], N) :- dif(X, Y), countIdenticalConsecutive([Y | T], N).
 
 % Alphabetical distance between two answer letters.
 charDist(A, B, N) :- charValue(A, X), charValue(B, Y), N is abs(X - Y).
@@ -46,7 +46,6 @@ charValue(e, 4).
 % Problem constraints are not in order as it may slow the search
 solve(ANS) :-
     length(ANS, 20),
-    allAnswers(ANS),
     p1(ANS),
     p2(ANS),
     p3(ANS),
